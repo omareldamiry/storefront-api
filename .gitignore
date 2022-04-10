@@ -1,4 +1,7 @@
+# directories
 /node_modules
 /dist
 
+# files
 yarn-error.log
+.env
