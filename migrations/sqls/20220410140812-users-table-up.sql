@@ -1,6 +1,7 @@
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    firstName VARCHAR(100) NOT NULL,
-    lastName VARCHAR(100) NOT NULL,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
