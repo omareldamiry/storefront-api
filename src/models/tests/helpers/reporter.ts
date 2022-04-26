@@ -3,19 +3,19 @@ import { DisplayProcessor, SpecReporter, StacktraceOption } from 'jasmine-spec-r
 import SuiteInfo = jasmine.SuiteInfo;
 
 class CustomProcessor extends DisplayProcessor {
-    public displayJasmineStarted(info: SuiteInfo, log: string): string {
-        return `${log}`;
-    }
+  public displayJasmineStarted(info: SuiteInfo, log: string): string {
+    return `${log}`;
+  }
 }
 
 let reporter = new SpecReporter({
-    suite: {
-        displayNumber: true
-    },
-    spec: {
-        displayStacktrace: StacktraceOption.NONE
-    },
-    customProcessors: [CustomProcessor]
+  suite: {
+    displayNumber: true
+  },
+  spec: {
+    displayStacktrace: StacktraceOption.NONE
+  },
+  customProcessors: [CustomProcessor]
 });
 
 jasmine.getEnv().clearReporters();
