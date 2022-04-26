@@ -6,7 +6,7 @@ This project was developed for the purpose of fulfilling the requirements of the
 
 ## Setup
 
-- Clone this repository using `git clone www.github.com/u/omareldamiry/storefront-api`
+- Clone this repository using `git clone https://github.com/omareldamiry/storefront-api.git`
 - Open a terminal in the root directory of the project.
 - Run `yarn` or `npm install` to install all dependencies.
 
