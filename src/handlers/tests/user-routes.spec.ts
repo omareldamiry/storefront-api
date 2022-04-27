@@ -12,13 +12,13 @@ describe('User routes', () => {
     password: 'pass123'
   };
   // Token is set to a valid jwt token.
-  let token: string = 'eyJhbGciOiJIUzI1NiJ9.bGFuY2Vy.F8Yw8uMHdaVXHjUVNwLRQ2jhu8rzzkDqqsLpzhxcagw';
+  let token = 'eyJhbGciOiJIUzI1NiJ9.bGFuY2Vy.F8Yw8uMHdaVXHjUVNwLRQ2jhu8rzzkDqqsLpzhxcagw';
 
   it('[GET] /users => should return an empty list', async () => {
     const response = await request.get('/users').set('Authorization', `Bearer ${token}`);
     expect(response.body).toEqual([]);
   });
-  
+
   it('[POST] /signup => should add and return a new user', async () => {
     const response = await request.post('/signup').send({ user: newUser });
     newUser.id = response.body.id;
@@ -26,10 +26,12 @@ describe('User routes', () => {
   });
 
   it('[GET] /users/:id => should return a user', async () => {
-    const response = await request.get(`/users/${newUser.id}`).set('Authorization', `Bearer ${token}`);
+    const response = await request
+      .get(`/users/${newUser.id}`)
+      .set('Authorization', `Bearer ${token}`);
     expect(response.body.username).toEqual(newUser.username);
-  })
-  
+  });
+
   it('[POST] /login => should login to an existing user', async () => {
     const response = await request.post('/login').send({
       user: {

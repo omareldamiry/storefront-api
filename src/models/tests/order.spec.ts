@@ -39,7 +39,7 @@ describe('Order model', () => {
       /* eslint-disable */
       order.user_id = newUser.id!;
       /* eslint-enable */
-    })
+    });
     describe('Show method', () => {
       it('should fetch orders by a specific user', async () => {
         const orders = await store.show(order.user_id);
@@ -75,6 +75,6 @@ describe('Order model', () => {
     });
     afterAll(async () => {
       await userStore.delete(order.user_id);
-    })
+    });
   });
 });

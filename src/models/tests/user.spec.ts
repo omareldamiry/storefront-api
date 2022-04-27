@@ -50,10 +50,12 @@ describe('User model', () => {
 
     describe('Show method', () => {
       it('should fetch a user by id', async () => {
+        /* eslint-disable */
         const fetchedUser = await store.show(user.id!);
+        /* eslint-enable */
         expect(fetchedUser.username).toEqual(user.username);
-      })
-    })
+      });
+    });
 
     describe('Login method', () => {
       it('should fetch a user by username', async () => {

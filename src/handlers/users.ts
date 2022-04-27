@@ -13,7 +13,6 @@ const index = async (_req: Request, _res: Response) => {
     _res.json(users);
   } catch (error) {
     _res.status(500).json({ message: 'Internal Server Error: Failed to Fetch Users' });
-
   }
 };
 

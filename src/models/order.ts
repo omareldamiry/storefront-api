@@ -24,11 +24,11 @@ export class OrderStore {
 
     orderResult.rows.map(async (order) => {
       const productResult = await conn.query<OrderProduct>(productSql, [order.id]);
-      productResult.rows.forEach(product => {
+      productResult.rows.forEach((product) => {
         order.product_ids.push(product.id);
         order.product_quantities.push(product.quantity);
       });
-    })
+    });
 
     conn.release();
     return orderResult.rows;
@@ -54,8 +54,13 @@ export class OrderStore {
 
   async addProduct(orderProduct: OrderProduct): Promise<OrderProduct> {
     const conn = await client.connect();
-    const sql = 'INSERT INTO order_products (order_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *;';
-    const result = await conn.query<OrderProduct>(sql, [orderProduct.order_id, orderProduct.product_id, orderProduct.quantity]);
+    const sql =
+      'INSERT INTO order_products (order_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING *;';
+    const result = await conn.query<OrderProduct>(sql, [
+      orderProduct.order_id,
+      orderProduct.product_id,
+      orderProduct.quantity
+    ]);
 
     conn.release();
     return result.rows[0];
