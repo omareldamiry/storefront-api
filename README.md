@@ -65,3 +65,30 @@ To start the server:
 ## Endpoints
 
 **All endpoints are described in the `REQUIREMENTS.md` file under the project root directory.
+
+## Test data
+For testing purposes, the below data can be used:
+```json
+// User
+{
+    "username": "johndoe",
+    "firstname": "John",
+    "lastname": "Doe",
+    "password": "password123"
+},
+// Product [User Required]
+{
+    "name": "Washing Machine",
+    "price": 700,
+    "category": "Home Appliances"
+},
+// Order [User Required]
+{
+    "product_ids": [1, 2, 3],
+    "product_quantities": [1, 2, 1],
+    "status": "active",
+    "user_id": 1,
+}
+```
+
+**To test authorization access, please set the `Authorization` request header to this valid JWT token: `eyJhbGciOiJIUzI1NiJ9.bGFuY2Vy.F8Yw8uMHdaVXHjUVNwLRQ2jhu8rzzkDqqsLpzhxcagw`.
