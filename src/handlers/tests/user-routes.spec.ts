@@ -11,10 +11,11 @@ describe('User routes', () => {
     lastname: 'Eldamiry',
     password: 'pass123'
   };
-  let token: string;
+  // Token is set to a valid jwt token.
+  let token: string = 'eyJhbGciOiJIUzI1NiJ9.bGFuY2Vy.F8Yw8uMHdaVXHjUVNwLRQ2jhu8rzzkDqqsLpzhxcagw';
 
   it('should return an empty list', async () => {
-    const response = await request.post('/users');
+    const response = await request.get('/users').set('Authorization', `Bearer ${token}`);
     expect(response.body).toEqual([]);
   });
 
