@@ -49,8 +49,15 @@ describe('User model', () => {
     });
 
     describe('Show method', () => {
+      it('should fetch a user by id', async () => {
+        const fetchedUser = await store.show(user.id!);
+        expect(fetchedUser.username).toEqual(user.username);
+      })
+    })
+
+    describe('Login method', () => {
       it('should fetch a user by username', async () => {
-        const fetchedUser = await store.show(user.username);
+        const fetchedUser = await store.login(user.username);
         expect(fetchedUser.id).toEqual(user.id);
       });
     });

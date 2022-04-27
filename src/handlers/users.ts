@@ -17,9 +17,19 @@ const index = async (_req: Request, _res: Response) => {
   }
 };
 
+const show = async (_req: Request, _res: Response) => {
+  const id = parseInt(_req.params.id);
+  try {
+    const user = await store.show(id);
+    _res.json(user);
+  } catch (error) {
+    _res.status(500).json({ message: 'Internal Server Error: Failed to Fetch User' });
+  }
+};
+
 const login = async (_req: Request, _res: Response) => {
   try {
-    const user = await store.show(_req.body.user.username);
+    const user = await store.login(_req.body.user.username);
     const secret = process.env.SECRET || 'secret';
     const isCorrectPassword = bcrypt.compareSync(_req.body.user.password + secret, user.password);
 
@@ -77,6 +87,7 @@ const remove = async (_req: Request, _res: Response) => {
 
 const user_routes = (_app: express.Application) => {
   _app.get('/users', validateToken, index);
+  _app.get('/users/:id', validateToken, show);
   _app.post('/login', login);
   _app.post('/signup', signup);
   _app.put('/users/:id', validateToken, update);

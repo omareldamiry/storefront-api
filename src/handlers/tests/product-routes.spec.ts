@@ -29,12 +29,12 @@ describe('Product routes', () => {
     token = loginResponse.body.token;
   });
 
-  it('should return an empty list', async () => {
+  it('[GET] /products => should return an empty list', async () => {
     const response = await request.get('/products');
     expect(response.body).toEqual([]);
   });
 
-  it('should add and return a new product', async () => {
+  it('[POST] /products => should add and return a new product', async () => {
     const response = await request
       .post('/products')
       .set('Authorization', `Bearer ${token}`)
@@ -44,12 +44,12 @@ describe('Product routes', () => {
     expect(response.body.id).toEqual(1);
   });
 
-  it('should return a product from id', async () => {
+  it('[GET] /products/:id => should return a product from id', async () => {
     const response = await request.get('/products/1');
     expect(response.body.id).toEqual(1);
   });
 
-  it('should update an existing product', async () => {
+  it('[PUT] /products/:id => should update an existing product', async () => {
     const response = await request
       .put('/products/1')
       .set('Authorization', `Bearer ${token}`)
@@ -65,7 +65,7 @@ describe('Product routes', () => {
     expect(response.body.name).toEqual('Fridge');
   });
 
-  it('should delete an existing product', async () => {
+  it('[DELETE] /products/:id => should delete an existing product', async () => {
     const response = await request.delete('/products/1').set('Authorization', `Bearer ${token}`);
     expect(response.body.id).toEqual(1);
   });

@@ -35,14 +35,14 @@ describe('Order routes', () => {
     token = loginResponse.body.token;
   });
 
-  it('should return an empty list', async () => {
+  it('[GET] /:userId/orders => should return an empty list', async () => {
     const response = await request
       .get(`/${user.id}/orders`)
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toEqual([]);
   });
 
-  it('should create a new order', async () => {
+  it('[POST] /:userId/orders => should create a new order', async () => {
     const response = await request
       .post(`/${user.id}/orders`)
       .set('Authorization', `Bearer ${token}`)
@@ -52,7 +52,7 @@ describe('Order routes', () => {
     expect(response.body.id).toEqual(1);
   });
 
-  it('should update existing orders', async () => {
+  it('[PUT] /:userId/orders/:orderId => should update existing orders', async () => {
     const response = await request
       .put(`/${user.id}/orders/${order.id}`)
       .set('Authorization', `Bearer ${token}`)
@@ -69,7 +69,7 @@ describe('Order routes', () => {
     expect(response.body.status).toEqual('complete');
   });
 
-  it('should delete an existing order', async () => {
+  it('[DELETE] /:userId/orders/:orderId => should delete an existing order', async () => {
     const response = await request
       .delete(`/${user.id}/orders/${order.id}`)
       .set('Authorization', `Bearer ${token}`);

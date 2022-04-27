@@ -14,18 +14,23 @@ describe('User routes', () => {
   // Token is set to a valid jwt token.
   let token: string = 'eyJhbGciOiJIUzI1NiJ9.bGFuY2Vy.F8Yw8uMHdaVXHjUVNwLRQ2jhu8rzzkDqqsLpzhxcagw';
 
-  it('should return an empty list', async () => {
+  it('[GET] /users => should return an empty list', async () => {
     const response = await request.get('/users').set('Authorization', `Bearer ${token}`);
     expect(response.body).toEqual([]);
   });
-
-  it('should add and return a new user', async () => {
+  
+  it('[POST] /signup => should add and return a new user', async () => {
     const response = await request.post('/signup').send({ user: newUser });
     newUser.id = response.body.id;
     expect(response.body.username).toBe(newUser.username);
   });
 
-  it('should login to an existing user', async () => {
+  it('[GET] /users/:id => should return a user', async () => {
+    const response = await request.get(`/users/${newUser.id}`).set('Authorization', `Bearer ${token}`);
+    expect(response.body.username).toEqual(newUser.username);
+  })
+  
+  it('[POST] /login => should login to an existing user', async () => {
     const response = await request.post('/login').send({
       user: {
         username: newUser.username,
@@ -36,7 +41,7 @@ describe('User routes', () => {
     expect(response.body.token).toBeDefined();
   });
 
-  it('should update an existing user', async () => {
+  it('[PUT] /users/:id => should update an existing user', async () => {
     const response = await request
       .put(`/users/${newUser.id}`)
       .set('Authorization', `Bearer ${token}`)
@@ -52,7 +57,7 @@ describe('User routes', () => {
     expect(response.body.firstname).toEqual('John');
   });
 
-  it('should delete an existing user', async () => {
+  it('[DELETE] /users/:id => should delete an existing user', async () => {
     const response = await request
       .delete(`/users/${newUser.id}`)
       .set('Authorization', `Bearer ${token}`);
