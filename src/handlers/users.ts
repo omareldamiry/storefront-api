@@ -8,9 +8,13 @@ const store = new UserStore();
 const jwt = jsonwebtoken;
 
 const index = async (_req: Request, _res: Response) => {
-  const users = await store.index();
+  try {
+    const users = await store.index();
+    _res.json(users);
+  } catch (error) {
+    _res.status(500).json({ message: 'Internal Server Error: Failed to Fetch Users' });
 
-  _res.json(users);
+  }
 };
 
 const login = async (_req: Request, _res: Response) => {
@@ -72,7 +76,7 @@ const remove = async (_req: Request, _res: Response) => {
 };
 
 const user_routes = (_app: express.Application) => {
-  _app.post('/users', index);
+  _app.get('/users', validateToken, index);
   _app.post('/login', login);
   _app.post('/signup', signup);
   _app.put('/users/:id', validateToken, update);
