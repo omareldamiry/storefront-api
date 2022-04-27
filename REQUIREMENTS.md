@@ -29,21 +29,57 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
-- [OPTIONAL] category
+-  id: number
+- name: string
+- price: number
+- [OPTIONAL] category: string
 
 #### User
-- id
-- firstName
-- lastName
-- password
+- id: number
+- firstName: string
+- lastName: string
+- password: string
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+- id: number
+- id of each product in the order: number[]
+- quantity of each product in the order: number[]
+- user_id: number
+- status of order (active or complete): "active" | "complete"
 
+## Database schema
+#### Users Table
+
+|   Column  |           Type           |
+|:---------:|:------------------------:|
+| id        | integer                  |
+| username  | character variable (100) |
+| firstname | character variable (100) |
+| lastname  | character variable (100) |
+| password  | character variable (255) |
+
+#### Products Table
+
+|  Column  |           Type           |
+|:--------:|:------------------------:|
+| id       | integer                  |
+| name     | character variable (255) |
+| price    | integer                  |
+| category | character variable (100) |
+
+#### Orders Table
+
+|  Column  |           Type           |
+|:--------:|:------------------------:|
+| id       | integer                  |
+| status   | character variable (10)  |
+| user_id  | bigint                   |
+
+#### Order_Products Table
+
+|   Column   |   Type  |
+|:----------:|:-------:|
+| id         | integer |
+| order_id   | bigint  |
+| product_id | bigint  |
+| quantity   | integer |
