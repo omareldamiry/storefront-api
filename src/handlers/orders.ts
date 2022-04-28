@@ -10,7 +10,7 @@ const show = async (_req: Request, _res: Response) => {
     const order = await store.show(userId);
     _res.json(order);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Could not Fetch Orders' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
@@ -19,7 +19,7 @@ const create = async (_req: Request, _res: Response) => {
     const newOrder = await store.create(_req.body.order as Order);
     _res.json(newOrder);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Could not Create Orders' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
@@ -28,7 +28,7 @@ const update = async (_req: Request, _res: Response) => {
     const updatedOrder = await store.update(_req.body.order as Order);
     _res.json(updatedOrder);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Could not Update Orders' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
@@ -38,7 +38,7 @@ const remove = async (_req: Request, _res: Response) => {
     const deletedOrder = await store.delete(id);
     _res.json(deletedOrder);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Could not Delete Orders' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 

@@ -22,7 +22,7 @@ const show = async (_req: Request, _res: Response) => {
     const user = await store.show(id);
     _res.json(user);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Failed to Fetch User' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
@@ -48,19 +48,16 @@ const login = async (_req: Request, _res: Response) => {
       _res.json({ message: 'Incorrect password' });
     }
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Failed to Login User' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
 const signup = async (_req: Request, _res: Response) => {
-  const salt = parseInt(process.env.SALT || '10');
-  const pepper = process.env.SECRET;
-  _req.body.user.password = bcrypt.hashSync(_req.body.user.password + pepper, salt);
   try {
     const newUser = await store.create(_req.body.user as User);
     _res.json(newUser);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Failed to Signup User' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
@@ -70,7 +67,7 @@ const update = async (_req: Request, _res: Response) => {
     const updatedUser = await store.update(_req.body.user as User);
     _res.json(updatedUser);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Failed to Update User' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
@@ -80,7 +77,7 @@ const remove = async (_req: Request, _res: Response) => {
     const deletedUser = await store.delete(id);
     _res.json(deletedUser);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Failed to Delete User' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 

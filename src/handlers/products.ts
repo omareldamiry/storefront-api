@@ -9,7 +9,7 @@ const index = async (_req: Request, _res: Response) => {
     const products = await store.index();
     _res.json(products);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Could not Fetch Products' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
@@ -18,7 +18,7 @@ const show = async (_req: Request, _res: Response) => {
     const product = await store.show(parseInt(_req.params.id));
     _res.json(product);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Could not Fetch Product' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
@@ -27,7 +27,7 @@ const create = async (_req: Request, _res: Response) => {
     const newProduct = await store.create(_req.body.product as Product);
     _res.json(newProduct);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Could not Create Product' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
@@ -36,7 +36,7 @@ const update = async (_req: Request, _res: Response) => {
     const updatedProduct = await store.update(_req.body.product as Product);
     _res.json(updatedProduct);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Could not Update Product' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
@@ -46,7 +46,7 @@ const remove = async (_req: Request, _res: Response) => {
     const deletedProduct = await store.delete(id);
     _res.json(deletedProduct);
   } catch (error) {
-    _res.status(500).json({ message: 'Internal Server Error: Could not Delete Product' });
+    _res.status(500).json({ message: `Internal Server Error: ${error}` });
   }
 };
 
